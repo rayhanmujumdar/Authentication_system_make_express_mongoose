@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const status = require('./routes')
 
-routes.get('/', (req,res) => {
+routes.get('/health', (_req,res) => {
     res.status(200).json({
         message: "success"
     })
