@@ -1,10 +1,9 @@
 const {Schema,model} = require('mongoose')
-
 const userSchema = new Schema({
     username: {
         type: String,
-        minLength: 4,
-        maxLength: 20,
+        minLength: [4,"minimum length is 4"],
+        maxLength: [20,"maximum length is 20"],
         trim: true,
         require: [true,"User Name is required"]
     },
@@ -31,16 +30,8 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        minLength: [6,'Password must be 6 character'],
-        validate: {
-            validator: (pass) => {
-                const regexPass = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
-                return regexPass.test(pass)
-            },
-            message: "Minimum six characters, at least one letter and one number"
-        }
+        require: [true,"password must be required"]
     }
-
 })
 
 const UserAuth = model("userSchema",userSchema)
